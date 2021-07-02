@@ -1,0 +1,26 @@
+@import models.ViewModel
+
+@this(main: main)
+
+@(vm: ViewModel)
+
+@main("Conways game of life") {
+  <h1>Conways game of life</h1>
+
+  <a href=@controllers.routes.HomeController.index()>
+    <button>Clear</button>
+  </a>
+
+  <button onclick="playPause()">Play/Reset</button>
+
+  <table style="border-spacing: 0px">
+    @for(y <- (ViewModel.height * -1) to ViewModel.height){
+      <tr>
+        @for(x <- (ViewModel.width * -1) to ViewModel.width){
+          <td style="width: @{ViewModel.boxsize}px; height: @{ViewModel.boxsize}px;@if(vm.blocks.contains((x, y))){background-color:red;}else{background-color:lightgrey;}" onclick="addCell(@x, @y)">
+        </td>
+        }
+      </tr>
+    }
+  </table>
+}
